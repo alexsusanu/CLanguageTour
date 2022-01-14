@@ -8,7 +8,7 @@
 #include <stdlib.h>
 #include "queue.h"
 
-struct node* createNode(int data){
+struct node* createNode(long data){
     struct node* newNode = malloc(sizeof(struct node));
     newNode->data = data;
     newNode->next = NULL;
@@ -22,7 +22,7 @@ struct queue* createQueue(void){
     return newQueue;
 }
 
-void enqueue(struct queue* myQueue, int data){
+void enqueue(struct queue* myQueue, long data){
     struct node* myNode = createNode(data);
     if(myQueue->head == NULL){
         myQueue->head = myNode;
@@ -33,11 +33,14 @@ void enqueue(struct queue* myQueue, int data){
     myQueue->tail = myNode;
 }
 
-int dequeue(struct queue* myQueue){
+long dequeue(struct queue* myQueue){
     struct node* oldHead = myQueue->head;
     myQueue->head = myQueue->head->next;
-    int data = oldHead->data;
+    long data = oldHead->data;
     free(oldHead);
     return data;
 }
 
+bool isEmpty(struct queue* myQueue){
+    return myQueue->head == NULL;
+}
